@@ -3,4 +3,20 @@ h1 {
   cursor: pointer;
 }
 
+.card-course-item {
+  margin-top: 10px;
+}
+
+.cut-text {
+  width: 100%;
+  overflow: hidden;
+  display: inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.course-name-item {
+  text-decoration: none;
+}
+
 /*# sourceMappingURL=app.css.map */
