@@ -1,8 +1,10 @@
-const mongoose = require('mongoose');
+const {mongoose,MongoClient } = require('mongoose');
+const URL = 'mongodb+srv://chuhuutien:0369272144@courses.gpm75af.mongodb.net/courses-blog';
+const local = 'mongodb://localhost:27017';
 
 async function connect() {
   try {
-    await mongoose.connect('mongodb://127.0.0.1:27017/education_dev');
+    await mongoose.connect(URL);
     console.log('Connect successfull!!!');
   } catch (error) {
     console.log('fail');
@@ -10,3 +12,4 @@ async function connect() {
 }
 
 module.exports = { connect };
+
