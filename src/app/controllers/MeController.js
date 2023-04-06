@@ -6,16 +6,26 @@ class MeController {
 
 
   //[GET] /me/stored/courses
-  async storedCourses(req,res,next){
+  storedCourses(req,res,next){
+
+    let courseQuery = Course.find({}).lean();
+    // res.json(res.locals._sort);
+
+    //  if(req.query.hasOwnProperty('_sort')){
+    //   courseQuery = courseQuery.sort({
+    //     [req.query.column] : req.query.type
+    //   });
+    // } 
+
     var CoursesDeletedCount;
-   await Course.countDocumentsDeleted()
+    Course.countDocumentsDeleted()
     .then((DeletedCount)=>{
       CoursesDeletedCount = DeletedCount
     })
-    .catch(()=>{});
+    .catch(next);
 
-    await Course.find({})
-    .lean()
+    courseQuery
+    // .lean()
     .then( courses=> res.render('me/stored-Courses',{courses,CoursesDeletedCount}))
     .catch(next);
     

@@ -3,14 +3,17 @@ const express = require('express');
 const morgan = require('morgan');
 const { engine } = require('express-handlebars');
 var methodOverride = require('method-override');
-const app = express();
-const port = 3000;
+
+const sortMiddleware = require('./app/middlewares/sortMiddleware');
 
 const route = require('./routes');
 const db = require('./config/db');
 
 //Connection Database
 db.connect();
+
+const app = express();
+const port = 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -19,9 +22,13 @@ app.use(
     extended: true,
   }),
 );
+  
+
 app.use(express.json());
 
 app.use(methodOverride('_method'));
+
+app.use(sortMiddleware);
 
 //HTTP logger
 // app.use(morgan('combined'))
